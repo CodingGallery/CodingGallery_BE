@@ -4,3 +4,4 @@
 - Spring-Data-jpa
 - Spring-Security
 - MySQL
+- Gradle 7.4.1
