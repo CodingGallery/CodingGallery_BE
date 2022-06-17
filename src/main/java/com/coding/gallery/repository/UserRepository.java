@@ -1,9 +1,11 @@
 package com.coding.gallery.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.coding.gallery.domain.User;
 
-public interface UserRepository {
+public interface UserRepository extends JpaRepository<User, String>{
 	
-	// User 객체 저장하는 method
-	User save(User user);
+	User findByName(String name);
+	
 }
