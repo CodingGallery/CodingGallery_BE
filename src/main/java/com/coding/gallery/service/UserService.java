@@ -1,6 +1,12 @@
 package com.coding.gallery.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +14,7 @@ import com.coding.gallery.domain.User;
 import com.coding.gallery.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 	
 	@Autowired
 	UserRepository userRepo;
@@ -19,13 +25,19 @@ public class UserService {
 	}
 	
 	// 회원가입
-	public void signup(User user) {
+	public User signup(User userDto) {
+		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 		
-		user.setPw(pwEncoder.encode(user.getPw()));
-		userRepo.save(user);
+		User userDao = new User(userDto.getEmail(), pwEncoder.encode(userDto.getPw()),
+				userDto.getName(), userDto.getPhone(), userDto.getImage(), sdf.format(date), "MEMBER");
 		
+		userRepo.save(userDao);
+		
+		return userDao;		
 	}
 	
 	// 프로필
@@ -33,21 +45,9 @@ public class UserService {
 		
 	}
 
-//	@Override
-//	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//		
-//		Optional<User> userEntityWrapper = userRepo.findByEmail(email);
-//		User userEntity = userEntityWrapper.get();
-//		
-//		List<GrantedAuthority> authorities = new ArrayList<>();
-//		
-//		if(("admin").equals(email)) {
-//			authorities.add(new SimpleGrantedAuthority("ADMIN"));
-//		} else {
-//			authorities.add(new SimpleGrantedAuthority("MEMBER"));
-//		}
-//		
-//		return new org.springframework.security.core.userdetails.User(userEntity.getEmail(), userEntity.getPw(), authorities);
-//	}
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		return null;
+	}
 
 }

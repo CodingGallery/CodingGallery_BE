@@ -24,5 +24,11 @@ public class User {
 	private String phone;
 	private String image;
 	private String join_date;
+	private String role;
+	
+	@Override
+	public String toString() {
+		return "User [ email : " + email + " name : " + name + " phone : " + phone + " join_date : " + join_date + " ]";
+	}
 
 }
