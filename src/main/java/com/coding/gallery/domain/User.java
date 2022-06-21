@@ -25,6 +25,8 @@ public class User {
 	private String image;
 	private String join_date;
 	private String role;
+	private String moddate = null;
+	private String regedate = null;
 	
 	@Override
 	public String toString() {

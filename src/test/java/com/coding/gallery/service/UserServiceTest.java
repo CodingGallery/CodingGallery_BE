@@ -21,7 +21,7 @@ public class UserServiceTest {
 	@Test
 	public void singup() {
 		
-		User user = new User("test@test.com", "test", "test", "test", "test", null, null);
+		User user = new User("test@test.com", "test", "test", "test", "test", null, null, null, null);
 
 		User user_test = userService.signup(user);
 		BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();

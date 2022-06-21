@@ -2,7 +2,6 @@ package com.coding.gallery.repository;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,14 +23,14 @@ public class UserRepositoryTest {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		
 		// given
-		User user = new User("test@test.com", "test", "test", "test", "test", df.format(date), "ADMIN");
+		User user = new User("test@test.com", "test", "test", "test", "test", df.format(date), "ADMIN", null, null);
 
 		// when
 		userRepo.save(user);
-		Optional<User> result = userRepo.findByEmail("test@test.com");
+		User result = userRepo.findByEmail("test@test.com");
 		
 		// then
-		Assertions.assertEquals(result.get().getName(), user.getName());
+		Assertions.assertEquals(result.getName(), user.getName());
 		
 	}
 	
