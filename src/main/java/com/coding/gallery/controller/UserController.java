@@ -71,7 +71,7 @@ public class UserController {
 			log.warn(e.getMessage());
 			return ResponseEntity.status(400).body(httpRes);
 		} finally {
-			log.info("### Profile Methdo End");
+			log.info("### Profile Method End");
 			log.info(user.toString());
 			
 		}

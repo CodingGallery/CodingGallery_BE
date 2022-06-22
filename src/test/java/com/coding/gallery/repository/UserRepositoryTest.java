@@ -23,7 +23,7 @@ public class UserRepositoryTest {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		
 		// given
-		User user = new User("test@test.com", "test", "test", "test", "test", df.format(date), "ADMIN", null, null);
+		User user = new User("test@test.com", "test", "test", "test", "test", df.format(date), "MEMBER");
 
 		// when
 		userRepo.save(user);

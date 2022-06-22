@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ImageController {
 	
 	//게시글 이미지 업로드
-	@PostMapping("/imageUpload")
+	@PostMapping("/image/upload")
 	public void imageUpload() {
 		
 	}

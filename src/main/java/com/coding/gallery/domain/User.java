@@ -22,15 +22,13 @@ public class User {
 	private String pw;
 	private String name;
 	private String phone;
-	private String image;
+	private String profile_img;
 	private String join_date;
 	private String role;
-	private String moddate = null;
-	private String regedate = null;
 	
 	@Override
 	public String toString() {
-		return "User [ email : " + email + " name : " + name + " phone : " + phone + " join_date : " + join_date + " ]";
+		return "User [ email : " + email + ", name : " + name + ", phone : " + phone + ", join_date : " + join_date + " ]";
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.coding.gallery.service;
 
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -36,10 +37,14 @@ public class UserService implements UserDetailsService {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
+		// password 암호화
 		BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 		
+		// Base64 URL 암호화
+		String profileImg = Base64.getUrlEncoder().encodeToString(userDto.getProfile_img().getBytes());
+		
 		User userDao = new User(userDto.getEmail(), pwEncoder.encode(userDto.getPw()),
-				userDto.getName(), userDto.getPhone(), userDto.getImage(), sdf.format(date), "MEMBER", null, null);
+				userDto.getName(), userDto.getPhone(), profileImg, sdf.format(date), "MEMBER");
 		try {
 			userRepo.save(userDao);
 		} catch(Exception e) {
@@ -51,7 +56,14 @@ public class UserService implements UserDetailsService {
 	
 	// 프로필
 	public User profile(String email) {
-		return userRepo.findByEmail(email);
+		
+		User user = userRepo.findByEmail(email);
+		
+		byte[] profileImg = Base64.getDecoder().decode(user.getProfile_img());
+		
+		user.setProfile_img(new String(profileImg));
+		
+		return user;
 	}
 
 	@Override
