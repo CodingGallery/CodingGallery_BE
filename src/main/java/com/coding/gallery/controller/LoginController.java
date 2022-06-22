@@ -30,6 +30,7 @@ public class LoginController {
 	}
 	*/
 	
+	
 	/*
 	@GetMapping("/artist")
 	public String forArtist() {

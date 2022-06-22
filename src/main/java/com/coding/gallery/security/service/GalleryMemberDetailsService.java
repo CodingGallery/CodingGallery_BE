@@ -45,6 +45,7 @@ public class GalleryMemberDetailsService implements UserDetailsService {
 		}
 		*/
 		
+		
 		GalleryMember galleryMember = result.get();
 
 		//log.info("GalleryMemberDetailsService Password : " + galleryMember.getPassword());

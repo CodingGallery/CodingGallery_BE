@@ -19,6 +19,7 @@ public class GallerySecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 	
+	
 	@Override
 	protected void configure(HttpSecurity security) throws Exception {
 
