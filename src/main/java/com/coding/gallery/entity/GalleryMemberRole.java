@@ -1,7 +1,6 @@
 package com.coding.gallery.entity;
 
 public enum GalleryMemberRole {
-	USER,
-	MNAANAGER,
-	ADMIN
+	ROLE_MEMBER,
+	ROLE_ADMIN
 }

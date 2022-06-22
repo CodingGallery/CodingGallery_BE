@@ -8,17 +8,27 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/login/")
 public class LoginController {
 	
-	@GetMapping("/")
-	public void index() {
-		log.info("=======================> index");
-		log.info("=======================> index");
-		log.info("=======================> index");
-		log.info("=======================> index");
-		log.info("=======================> index");
+	/*
+	@GetMapping("/login")
+	public void login() {
+		log.info("=======================> login()");
+		log.info("=======================> login()");
+		log.info("=======================> login()");
+		log.info("=======================> login()");
+		log.info("=======================> login()");
 	}
+	
+	@GetMapping("/loginProc")
+	public void loginProc() {
+		log.info("=======================> loginProc()");
+		log.info("=======================> loginProc()");
+		log.info("=======================> loginProc()");
+		log.info("=======================> loginProc()");
+		log.info("=======================> loginProc()");
+	}
+	*/
 	
 	/*
 	@GetMapping("/artist")

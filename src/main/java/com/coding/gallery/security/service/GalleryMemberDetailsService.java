@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class GalleryMemberDetailsService implements UserDetailsService {
 	
+	@Autowired
 	private final GalleryMemberRepository galleryMemberRepository;
 	
 	@Override
@@ -49,17 +51,7 @@ public class GalleryMemberDetailsService implements UserDetailsService {
 		log.info("GalleryMemberDetailsService GalleryMember : " + galleryMember.toString());
 		log.info("GalleryMemberDetailsService ===================================================================================");
 		
-		
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(galleryMember.getRole()));
-
-		GalleryAuthMemberDTO galleryAuthMember = new GalleryAuthMemberDTO(
-					galleryMember.getEmail(),
-					galleryMember.getPassword(),
-					authorities
-		);
-		
-		galleryAuthMember.setName(galleryMember.getName());
+		GalleryAuthMemberDTO galleryAuthMember = new GalleryAuthMemberDTO(galleryMember);
 		
 		return galleryAuthMember;
 		

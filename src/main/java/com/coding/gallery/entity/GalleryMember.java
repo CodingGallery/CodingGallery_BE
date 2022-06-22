@@ -9,6 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 //@Table(name = "user")
 public class GalleryMember extends BaseEntity {
@@ -18,13 +19,15 @@ public class GalleryMember extends BaseEntity {
 	private String password;
 	private String name;
 	private String image;
-	private String role;
+	
+	@Enumerated(EnumType.STRING)
+	private GalleryMemberRole role;
 
 	//@ElementCollection(fetch = FetchType.LAZY)
 	//@Builder.Default
 	//private Set<GalleryMemberRole> roleSet = new HashSet<>();
 	
 	//public void addGalleryMemberRole(GalleryMemberRole galleryMemberRole) {
-		//roleSet.add(galleryMemberRole);
+		//roleSet.add(galleryMemberRole);ps
 	//}
 }
