@@ -38,6 +38,7 @@ public class GalleryMemberDetailsService implements UserDetailsService {
 		
 		Optional<GalleryMember> result = galleryMemberRepository.findByEmail(username);
 		
+		
 
 		/*
 		if(result.isPresent()) {
