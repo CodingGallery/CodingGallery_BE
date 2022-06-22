@@ -30,5 +30,5 @@ public class GalleryMember extends BaseEntity {
 	//public void addGalleryMemberRole(GalleryMemberRole galleryMemberRole) {
 		//roleSet.add(galleryMemberRole);ps
 	//}
-	
+	 
 }

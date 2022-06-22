@@ -10,3 +10,4 @@ public interface GalleryMemberRepository extends JpaRepository<GalleryMember, St
 
 	Optional<GalleryMember> findByEmail(String email);
 }
+ 

@@ -19,7 +19,7 @@ public class ProfileController {
 		log.info("=======================> index");
 		log.info("=======================> index");
 	}
-	
+	 
 	/*
 	@GetMapping("/artist")
 	public String forArtist() {
