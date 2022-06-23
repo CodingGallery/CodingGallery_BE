@@ -3,11 +3,11 @@ package com.coding.gallery.service;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -55,19 +55,40 @@ public class UserService implements UserDetailsService {
 	}
 	
 	// 프로필
-	public User profile(String email) {
+	public Optional<User> profile(String email) {
 		
-		User user = userRepo.findByEmail(email);
+		Optional<User> user = userRepo.findByEmail(email);
 		
-		byte[] profileImg = Base64.getDecoder().decode(user.getProfile_img());
+		byte[] profileImg = Base64.getDecoder().decode(user.get().getProfile_img());
 		
-		user.setProfile_img(new String(profileImg));
+		user.get().setProfile_img(new String(profileImg));
 		
 		return user;
 	}
+	
+	@SuppressWarnings("static-access")
+	public boolean duplicate(String email) {
+		
+		Optional<User> user = userRepo.findByEmail(email);
+		
+		if(user.empty() != null) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
 
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	public User loadUserByUsername(String email) throws UsernameNotFoundException {
+		
+		Optional<User> result = userRepo.findByEmail(email);
+		
+		if(result != null) {
+			return new User(result.get().getEmail(), result.get().getPw(), result.get().getName(),
+					result.get().getPhone(), result.get().getProfile_img(), result.get().getJoin_date(), result.get().getRole());
+		}
+		
 		return null;
 	}
 

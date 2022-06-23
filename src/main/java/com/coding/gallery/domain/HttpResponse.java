@@ -1,5 +1,7 @@
 package com.coding.gallery.domain;
 
+import java.util.Optional;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,6 @@ import lombok.Setter;
 public class HttpResponse {
 	
 	private String message;
-	private User user;
+	private Optional<User> user;
 
 }

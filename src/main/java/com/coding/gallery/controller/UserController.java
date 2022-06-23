@@ -1,5 +1,7 @@
 package com.coding.gallery.controller;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class UserController {
 	UserService userService;
 	
 	// 로그인
-	@GetMapping("/login")
+	@GetMapping("/loginProc")
 	public void login() {
 		
 	}
@@ -40,10 +42,15 @@ public class UserController {
 		httpRes.setMessage("Sign Up");
 		
 		try {
-			user = userService.signup(userDto);
-			return ResponseEntity.status(200).body(httpRes);
+			if(userService.duplicate(userDto.getEmail())) {
+				user = userService.signup(userDto);
+				return ResponseEntity.status(200).body(httpRes);
+			} else {
+				return ResponseEntity.status(400).body(httpRes);
+			}
 		} catch(Exception e) {
 			log.warn(e.getMessage());
+			httpRes.setMessage(e.getMessage());
 			return ResponseEntity.status(400).body(httpRes);
 		} finally {
 			log.info("### Sign up Mehtod End");
@@ -58,13 +65,13 @@ public class UserController {
 		
 		log.info("### Profile Method Start");
 		
-		User user = null;
+		Optional<User> user = null;
 		HttpResponse httpRes = new HttpResponse();
 		httpRes.setMessage("Profile");
 		
 		try {
 			user = userService.profile(email);
-			user.setPw(null);
+			user.get().setPw(null);
 			httpRes.setUser(user);
 			return ResponseEntity.status(200).body(httpRes);
 		} catch(Exception e) {
