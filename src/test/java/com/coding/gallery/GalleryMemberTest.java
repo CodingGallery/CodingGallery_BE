@@ -25,6 +25,7 @@ public class GalleryMemberTest {
 	@Test
 	public void testRead() {
 		
+		/*
 		log.info("========================================================");
 		
 		Optional<GalleryMember> result = repository.findByEmail("test@test.com");
@@ -35,6 +36,7 @@ public class GalleryMemberTest {
 		log.info(galleryMember.toString());
 		
 		System.out.println(galleryMember);
+		*/
 	}
 
 }

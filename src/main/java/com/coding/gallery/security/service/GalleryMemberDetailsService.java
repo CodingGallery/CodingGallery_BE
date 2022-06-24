@@ -37,8 +37,6 @@ public class GalleryMemberDetailsService implements UserDetailsService {
 		log.info("GalleryMemberDetailsService loadUserByUsername : " + username);
 		
 		Optional<GalleryMember> result = galleryMemberRepository.findByEmail(username);
-		
-		
 
 		/*
 		if(result.isPresent()) {

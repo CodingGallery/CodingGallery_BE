@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.coding.gallery.security.filter.GalleryAuthenticationFailureHandler;
+import com.coding.gallery.security.filter.GalleryAuthenticationSuccessHandler;
+
 @Configuration
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
@@ -20,23 +23,40 @@ public class GallerySecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	 
+	@Bean
+	public GalleryAuthenticationSuccessHandler successHandler()
+	{
+		return new GalleryAuthenticationSuccessHandler();
+	}
+	
+	@Bean
+	public GalleryAuthenticationFailureHandler failureHandler()
+	{
+		return new GalleryAuthenticationFailureHandler();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity security) throws Exception {
 
+		security.csrf().disable();
+		
 		security.authorizeHttpRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/profile/**").authenticated()
 			.anyRequest().permitAll()
 			.and()
 			.formLogin()
-			.loginPage("/login")
-			.usernameParameter("userId")
-			.loginProcessingUrl("/loginProc")
-			.defaultSuccessUrl("/");
-
-		security.csrf().disable();
-		//security.formLogin();
-		security.logout();
+				.loginPage("/login")
+				.loginProcessingUrl("/loginProc")
+				.usernameParameter("username") 
+				.passwordParameter("userpassword")
+				//.defaultSuccessUrl("/")
+			    .successHandler(successHandler())
+			    .failureHandler(failureHandler())
+				.and()
+			.logout()
+				.logoutUrl("/logoutProc")
+				.logoutSuccessUrl("/");
 		
 		//security.exceptionHandling().accessDeniedPage("/accessDenied");
 	}
