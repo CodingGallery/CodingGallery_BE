@@ -55,7 +55,7 @@ public class GallerySecurityConfig extends WebSecurityConfigurerAdapter {
 			    .failureHandler(failureHandler())
 				.and()
 			.logout()
-				.logoutUrl("/logoutProc")
+				.logoutUrl("/logout")
 				.logoutSuccessUrl("/");
 		
 		//security.exceptionHandling().accessDeniedPage("/accessDenied");
